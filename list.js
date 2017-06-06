@@ -8,8 +8,9 @@ let clr
 
 function promoteItem(ev) {
     ev.preventDefault();
-
     console.log('promoting item')
+
+    document.querySelector('')
 }
 
 function deleteItem(ev) {
@@ -18,6 +19,9 @@ function deleteItem(ev) {
     document.querySelector('#title').innerHTML = ''
     count--
     console.log('deleting item')
+
+    // var el = document.getElementById('childeNode')
+    // el.parentNode.removeChild(el)
 }
 
 function addToList(list, name) {
@@ -28,7 +32,7 @@ function addToList(list, name) {
 
 function addPrm(li) {
     const promoteButton = document.createElement('button')
-    promoteButton.setAttribute('id', 'prmB')
+    promoteButton.setAttribute('id', 'prmB') 
     promoteButton.innerHTML = ' &nbsp &nbsp Promote &nbsp'
     return promoteButton
 }
@@ -42,7 +46,7 @@ function addDel(li) {
 
 function addClr() {
     const clearButton = document.createElement('button')
-    clearButton.setAttribute('id', 'clrB')
+    clearButton.setAttribute('class', 'clrB')
     clearButton.setAttribute('type', 'clear')
     clr = document.querySelector('#clrB')
 }
@@ -57,7 +61,7 @@ function renderList(list) {
         }
         var myList = document.getElementById('myList')
         if (listEmpty === false) {
-            listDisplay.insertBefore(li, document.getElementById('child'))
+            listDisplay.insertBefore(li, document.getElementById('childNode'))
         } else {
             listDisplay.appendChild(li)
         }
@@ -65,8 +69,8 @@ function renderList(list) {
 
     prm = document.querySelector('#buttonForm')
     prm.addEventListener('click', promoteItem)
-    del = document.querySelector('#buttonForm')
-    del.addEventListener('click', deleteItem)
+    // del = document.querySelector('#buttonForm')
+    // del.addEventListener('click', deleteItem)
 
     if (listEmpty) {
         document.querySelector('#title').querySelector('strong').innerHTML = 'My Favorite Things'
@@ -81,7 +85,7 @@ function renderListData(fieldName, value) {
     li.innerHTML = `${fieldName}: ${value}`
     li.setAttribute('id', 'childNode')
     li.appendChild(addPrm(li))
-    li.appendChild(addDel(li))
+    //li.appendChild(addDel(li))
     return li
 }
 
