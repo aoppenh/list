@@ -1,6 +1,7 @@
 let listEmpty = true
 let count = 0
 let list = new Array()
+let boolList = new Array()
 let array = new Array()
 
 const sub = document.querySelector('#listForm')
@@ -12,9 +13,17 @@ function promoteItem(ev) {
     ev.preventDefault();
     console.log('promoting item')
 
-    //let split = Object.keys(list).split('')
-    const end = '#prmB' + count
-    document.querySelector(end).style.border = 'thick solid crimson'
+    if (boolList[0]) {
+        boolList[0] = false
+        //let split = Object.keys(list).split('')
+        const pr = '#el' + count
+        document.querySelector(pr).style.border = 'thick solid crimson'
+    } else {
+        boolList[0] = true
+        //let split = Object.keys(list).split('')
+        const pr = '#el' + count
+        document.querySelector(pr).style.border = 'transparent'
+    }
 }
 
 function deleteItem(ev) {
@@ -28,18 +37,16 @@ function deleteItem(ev) {
     // el.parentNode.removeChild(el)
 }
 
-function addToList(list, name) {
-    let obj = new Object()
-    obj
-    list[count] = new Array()
-    count + ' : ' + name
+function addToList(name) {
     count++
+    list[count] = new Array(count + ' : ' + name)
+    boolList[count] = new Array(true)
     console.log('Added ' + list[count])
 }
 
 function addPrm() {
     const promoteButton = document.createElement('button')
-    promoteButton.setAttribute('id', 'prmB' + count) 
+    promoteButton.setAttribute('id', 'prmB' + count)
     promoteButton.innerHTML = ' &nbsp &nbsp Promote &nbsp'
     return promoteButton
 }
@@ -61,19 +68,17 @@ function addClr() {
 function renderList(list) {
     const listDisplay = document.createElement('ul')
     listDisplay.setAttribute('id', 'myList')
-    Object.keys(list).map(function (fieldName) {
-        array.push(fieldName)
-        const li = renderListData(fieldName, list[fieldName])
-        if (listEmpty) {
-            listDisplay.appendChild(addClr())
-        }
-        var myList = document.getElementById('myList')
-        if (!listEmpty) {
-            listDisplay.insertBefore(li, listDisplay.childNodes[1])
-        } else {
-            listDisplay.appendChild(li)
-        }
-    })
+    array.push(list[count])
+    const li = renderListData(list[count])
+    if (listEmpty) {
+        listDisplay.appendChild(addClr())
+    }
+    var myList = document.getElementById('myList')
+    if (!listEmpty) {
+        listDisplay.insertBefore(li, listDisplay.childNodes[1])
+    } else {
+        listDisplay.appendChild(li)
+    }
 
     prm = document.querySelector('#buttonForm')
     prm.addEventListener('click', promoteItem)
@@ -90,10 +95,10 @@ function renderList(list) {
     return listDisplay
 }
 
-function renderListData(fieldName, value) {
+function renderListData(value) {
     const li = document.createElement('li')
     li.innerHTML = `${value}`
-    li.setAttribute('id', 'childNode')
+    li.setAttribute('id', 'el' + count)
     li.appendChild(addPrm())
     //li.appendChild(addDel())
     return li
@@ -105,9 +110,8 @@ function handleSubmit(ev) {
     const tar = ev.target
     const name = tar.enter.value
     const details = document.querySelector('#list')
-    let list = {}
 
-    addToList(list, name)
+    addToList(name)
     details.appendChild(renderList(list))
 }
 
