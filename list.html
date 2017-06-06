@@ -9,7 +9,6 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="list.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
         <link rel="stylesheet" href="list.css">
     </head>
@@ -19,18 +18,19 @@
             <div>
                 <form id="listForm">
                     <p>
-                        <label for="enter" id="label" name="info"><strong>| Enter Your Information Below |</strong></label>
+                        <label for="enter" id="label" name="info"><strong>| Enter Your Favorite Things Below |</strong></label>
                         <input type="text" name="enter">
                     </p>
                     <button id="button" type="submit">Submit</button>
-                    <div id="list">
-                        <p id="title"><strong>My Favorite Things</strong></p>
-                        <div id="details">
-                            <ul><li>stuff</li></ul>
-                        </div>
+                </form>
+                <form id="buttonForm">
+                    <div id="stuff">
+                        <p id="title"><strong></strong></p>
+                        <div id="list"></div>
                     </div>
                 </form>
             </div>
         </section>
+        <script src="list.js"></script>
     </body>
 </html>

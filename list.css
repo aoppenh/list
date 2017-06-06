@@ -1,17 +1,26 @@
 body {
-    padding: 2rem;
+    padding: 3rem;
     background-color: grey;
 }
 
 h1 {
-    padding: 0rem 17rem 0rem;
+    text-align: center;
+}
+
+label {
+    text-align: center;
 }
 
 ul {
     font-size: 1.5rem;
+    list-style: none;
 }
 
-#list {
+button {
+    color: gold;
+}
+
+#stuff {
     padding: 4rem 5rem 0rem;
 }
 
