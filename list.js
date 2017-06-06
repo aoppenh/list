@@ -5,41 +5,59 @@ let boolList = new Array()
 let array = new Array()
 
 const sub = document.querySelector('#listForm')
+const listDisplay = document.createElement('ul')
 let prm
 let del
 let clr
 
-function promoteItem(ev) {
-    ev.preventDefault();
+function promoteItem(clicked_id) {
     console.log('promoting item')
 
-    if (boolList[0]) {
-        boolList[0] = false
-        //let split = Object.keys(list).split('')
-        const pr = '#el' + count
-        document.querySelector(pr).style.border = 'thick solid goldenrod'
-    } else {
-        boolList[0] = true
-        //let split = Object.keys(list).split('')
-        const pr = '#el' + count
-        document.querySelector(pr).style.border = 'transparent'
+    let k = 1
+    for (let bool in boolList) {
+        for (let name in list) {
+            let split = new Array()
+            split = name.split('')
+            const id = '#el' + split[0]
+            const nm = 'prmB' + name
+            if (boolList[k] && nm === clicked_id) {
+                boolList[k] = false
+                document.querySelector(id).style.border = 'thick solid goldenrod'
+            } else if (boolList[k] === false && nm === clicked_id) {
+                boolList[k] = true
+                document.querySelector(id).style.border = 'transparent'
+            }
+        }
+        k++
     }
+    return false
 }
 
-function deleteItem(ev) {
-    ev.preventDefault();
-
-    document.querySelector('#title').innerHTML = ''
-    count--
+function deleteItem(clicked_id) {
     console.log('deleting item')
 
-    // var el = document.getElementById('childeNode')
-    // el.parentNode.removeChild(el)
+    let k = 1
+    for (let bool in boolList) {
+        for (let name in list) {
+            let split = new Array()
+            split = name.split('')
+            const id = '#el' + split[0]
+            const nm = 'delB' + name
+            boolList[k] = false
+            document.querySelector(id).style.border = 'thick solid crimson'
+
+            var el = document.getElementById(id)
+            el.parentNode.removeChild(el)
+        }
+        k++
+    }
+
+    count--
 }
 
 function addToList(name) {
     count++
-    list[count] = new Array(count + ' : ' + name)
+    list[count] = new Array(count - 1 + ' : ' + name)
     boolList[count] = new Array(true)
     console.log('Added ' + list[count])
 }
@@ -47,6 +65,8 @@ function addToList(name) {
 function addPrm() {
     const promoteButton = document.createElement('button')
     promoteButton.setAttribute('id', 'prmB' + count)
+    promoteButton.setAttribute('onClick', 'promoteItem(this.id)')
+    promoteButton.setAttribute('type', 'button')
     promoteButton.innerHTML = ' &nbsp &nbsp Promote &nbsp'
     return promoteButton
 }
@@ -54,21 +74,23 @@ function addPrm() {
 function addDel() {
     const deleteButton = document.createElement('button')
     deleteButton.setAttribute('id', 'delB' + count)
+    deleteButton.setAttribute('onClick', 'deleteItem(this.id)')
+    deleteButton.setAttribute('type', 'button')
     deleteButton.innerHTML = '&nbsp Delete &nbsp'
     return deleteButton
 }
 
 function addClr() {
     const clearButton = document.createElement('button')
-    clearButton.setAttribute('class', 'clrB')
-    clearButton.setAttribute('type', 'clear')
+    clearButton.setAttribute('id', 'clrB' + count)
+    clearButton.setAttribute('onClick', 'handleReset(this.id)')
+    clearButton.setAttribute('type', 'button')
+    clearButton.innerHTML = 'Clear All'
     return clearButton
 }
 
 function renderList(list) {
-    const listDisplay = document.createElement('ul')
     listDisplay.setAttribute('id', 'myList')
-    array.push(list[count])
     const li = renderListData(list[count])
     if (listEmpty) {
         listDisplay.appendChild(addClr())
@@ -80,8 +102,8 @@ function renderList(list) {
         listDisplay.appendChild(li)
     }
 
-    prm = document.querySelector('#buttonForm')
-    prm.addEventListener('click', promoteItem)
+    // prm = document.querySelector('#buttonForm')
+    // prm.addEventListener('click', promoteItem)
     // del = document.querySelector('delB' + array[0])
     // del.addEventListener('click', deleteItem)
     // clr = document.querySelector('clrB' + array[0])
@@ -100,7 +122,7 @@ function renderListData(value) {
     li.innerHTML = `${value}`
     li.setAttribute('id', 'el' + count)
     li.appendChild(addPrm())
-    //li.appendChild(addDel())
+    li.appendChild(addDel())
     return li
 }
 
@@ -117,6 +139,12 @@ function handleSubmit(ev) {
 
 function handleReset() {
     count = 0
+
+    console.log('clearing list')
+
+    //$('li').remove()
+
+    location.reload()
 }
 
 sub.addEventListener('submit', handleSubmit)

@@ -25,7 +25,10 @@
                     <label for="enter" id="label" name="info"><strong>| Enter Your Favorite Things Below |</strong></label>
                     <input type="text" name="enter">
                 </p>
-                <button id="button" type="submit"><strong>Submit</strong></button>
+                <div>
+                <button id="button" type="submit"><strong>Submit &nbsp</strong></button>
+                <button id="clearButton" onClick="handleReset(this.id)" type="reset"><strong>&nbsp Clear List</strong></button>
+                </div>
             </form>
             <form id="buttonForm">
                 <div id="stuff">
@@ -36,6 +39,7 @@
         </div>
     </section>
     <script src="list.js"></script>
+    <script src="https://ajax.aspnetchcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </body>
 
 </html>
