@@ -6,6 +6,20 @@ let prm
 let del
 let clr
 
+function promoteItem(ev) {
+    ev.preventDefault();
+
+    console.log('promoting item')
+}
+
+function deleteItem(ev) {
+    ev.preventDefault();
+
+    document.querySelector('#title').innerHTML = ''
+    count--
+    console.log('deleting item')
+}
+
 function addToList(list, name) {
     count++
     list[count] = name
@@ -15,7 +29,6 @@ function addToList(list, name) {
 function addPrm(li) {
     const promoteButton = document.createElement('button')
     promoteButton.setAttribute('id', 'prmB')
-    promoteButton.setAttribute('type', 'promote')
     promoteButton.innerHTML = ' &nbsp &nbsp Promote &nbsp'
     return promoteButton
 }
@@ -23,7 +36,6 @@ function addPrm(li) {
 function addDel(li) {
     const deleteButton = document.createElement('button')
     deleteButton.setAttribute('id', 'delB')
-    deleteButton.setAttribute('type', 'delete')
     deleteButton.innerHTML = '&nbsp Delete &nbsp'
     return deleteButton
 }
@@ -50,6 +62,11 @@ function renderList(list) {
             listDisplay.appendChild(li)
         }
     })
+
+    prm = document.querySelector('#buttonForm')
+    prm.addEventListener('click', promoteItem)
+    del = document.querySelector('#buttonForm')
+    del.addEventListener('click', deleteItem)
 
     if (listEmpty) {
         document.querySelector('#title').querySelector('strong').innerHTML = 'My Favorite Things'
@@ -78,16 +95,6 @@ function handleSubmit(ev) {
 
     addToList(list, name)
     details.appendChild(renderList(list))
-
-    prm = document.querySelector('#buttonForm')
-    prm.addEventListener('click', function () {
-        console.log('promoting item')
-    })
-    del = document.querySelector('#buttonForm')
-    del.addEventListener('click', function () {
-        document.querySelector('#title').innerHTML = ''
-        count--
-    })
 }
 
 function handleReset() {
