@@ -26,20 +26,20 @@ function deleteItem(ev) {
 
 function addToList(list, name) {
     count++
-    list[count] = name
+    list[count] = count + ' : ' + name
     console.log('Added ' + list[count])
 }
 
 function addPrm(li) {
     const promoteButton = document.createElement('button')
-    promoteButton.setAttribute('id', 'prmB') 
+    promoteButton.setAttribute('id', 'prmB' + count) 
     promoteButton.innerHTML = ' &nbsp &nbsp Promote &nbsp'
     return promoteButton
 }
 
 function addDel(li) {
     const deleteButton = document.createElement('button')
-    deleteButton.setAttribute('id', 'delB')
+    deleteButton.setAttribute('id', 'delB' + count)
     deleteButton.innerHTML = '&nbsp Delete &nbsp'
     return deleteButton
 }
@@ -54,23 +54,25 @@ function addClr() {
 function renderList(list) {
     const listDisplay = document.createElement('ul')
     listDisplay.setAttribute('id', 'myList')
+    var array = []
     Object.keys(list).map(function (fieldName) {
+        array.push(fieldName)
         const li = renderListData(fieldName, list[fieldName])
         if (listEmpty) {
             addClr()
         }
         var myList = document.getElementById('myList')
-        if (listEmpty === false) {
-            listDisplay.insertBefore(li, document.getElementById('childNode'))
+        if (!listEmpty) {
+            listDisplay.insertBefore(li, listDisplay.childNodes[1])
         } else {
             listDisplay.appendChild(li)
         }
     })
 
-    prm = document.querySelector('#buttonForm')
+    prm = document.querySelector('prmB' + array[0])
     prm.addEventListener('click', promoteItem)
-    // del = document.querySelector('#buttonForm')
-    // del.addEventListener('click', deleteItem)
+    del = document.querySelector('delB' + array[0])
+    del.addEventListener('click', deleteItem)
 
     if (listEmpty) {
         document.querySelector('#title').querySelector('strong').innerHTML = 'My Favorite Things'
@@ -82,7 +84,7 @@ function renderList(list) {
 
 function renderListData(fieldName, value) {
     const li = document.createElement('li')
-    li.innerHTML = `${fieldName}: ${value}`
+    li.innerHTML = `${value}`
     li.setAttribute('id', 'childNode')
     li.appendChild(addPrm(li))
     //li.appendChild(addDel(li))
