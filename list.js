@@ -17,7 +17,7 @@ function promoteItem(ev) {
         boolList[0] = false
         //let split = Object.keys(list).split('')
         const pr = '#el' + count
-        document.querySelector(pr).style.border = 'thick solid crimson'
+        document.querySelector(pr).style.border = 'thick solid goldenrod'
     } else {
         boolList[0] = true
         //let split = Object.keys(list).split('')
