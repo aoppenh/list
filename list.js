@@ -142,9 +142,8 @@ function handleReset() {
 
     console.log('clearing list')
 
-    //$('li').remove()
-
-    location.reload()
+    $('ul').remove()
+    document.querySelector('#title').querySelector('strong').innerHTML = ''
 }
 
 sub.addEventListener('submit', handleSubmit)
