@@ -1,7 +1,11 @@
 let listEmpty = true
 
-const submit = document.querySelector('listForm')
-let clearAll
+const submitButton = document.querySelector('#listForm')
+let prom
+let del
+let clr
+
+const details = document.querySelector('#details')
 
 function handleSubmit(ev) {
     ev.preventDefault()
@@ -19,4 +23,20 @@ function addToList(list, name) {
 
 }
 
-submit.addEventListener('submit', handleSubmit)
+function addProm() {
+
+}
+
+function addDel() {
+
+}
+
+function addClr() {
+
+}
+
+function removeFromList() {
+
+}
+
+submitButton.addEventListener('submit', handleSubmit)
