@@ -2,7 +2,6 @@ let listEmpty = true
 let count = 0
 let list = new Array()
 let boolList = new Array()
-let array = new Array()
 
 const sub = document.querySelector('#listForm')
 const listDisplay = document.createElement('ul')
@@ -42,12 +41,10 @@ function deleteItem(clicked_id) {
             let split = new Array()
             split = name.split('')
             const id = '#el' + split[0]
-            const nm = 'delB' + name
+            const nm = '#el' + name
             boolList[k] = false
-            document.querySelector(id).style.border = 'thick solid crimson'
 
-            var el = document.getElementById(id)
-            el.parentNode.removeChild(el)
+            $(id).remove()
         }
         k++
     }
@@ -55,9 +52,10 @@ function deleteItem(clicked_id) {
     count--
 }
 
+
 function addToList(name) {
     count++
-    list[count] = new Array(count - 1 + ' : ' + name)
+    list[count] = new Array(count + ' : ' + name)
     boolList[count] = new Array(true)
     console.log('Added ' + list[count])
 }
@@ -80,24 +78,12 @@ function addDel() {
     return deleteButton
 }
 
-function addClr() {
-    const clearButton = document.createElement('button')
-    clearButton.setAttribute('id', 'clrB' + count)
-    clearButton.setAttribute('onClick', 'handleReset(this.id)')
-    clearButton.setAttribute('type', 'button')
-    clearButton.innerHTML = 'Clear All'
-    return clearButton
-}
-
 function renderList(list) {
     listDisplay.setAttribute('id', 'myList')
     const li = renderListData(list[count])
-    if (listEmpty) {
-        listDisplay.appendChild(addClr())
-    }
     var myList = document.getElementById('myList')
     if (!listEmpty) {
-        listDisplay.insertBefore(li, listDisplay.childNodes[1])
+        listDisplay.insertBefore(li, listDisplay.childNodes[0])
     } else {
         listDisplay.appendChild(li)
     }
@@ -110,7 +96,6 @@ function renderList(list) {
     // clr.addEventListener('click', handleReset)
 
     if (listEmpty) {
-        document.querySelector('#title').querySelector('strong').innerHTML = 'My Favorite Things'
         listEmpty = false
     }
 
@@ -122,7 +107,7 @@ function renderListData(value) {
     li.innerHTML = `${value}`
     li.setAttribute('id', 'el' + count)
     li.appendChild(addPrm())
-    li.appendChild(addDel())
+    //li.appendChild(addDel())
     return li
 }
 
@@ -139,11 +124,11 @@ function handleSubmit(ev) {
 
 function handleReset() {
     count = 0
+    listEmpty = true
 
     console.log('clearing list')
 
-    $('ul').remove()
-    document.querySelector('#title').querySelector('strong').innerHTML = ''
+    $('li').remove()
 }
 
 sub.addEventListener('submit', handleSubmit)
