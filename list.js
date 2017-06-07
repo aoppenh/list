@@ -2,6 +2,8 @@ let listEmpty = true
 let count = 0
 let list = new Array()
 let boolList = new Array()
+let delList = new Array()
+let liList = new Array()
 
 const sub = document.querySelector('#listForm')
 const listDisplay = document.createElement('ul')
@@ -44,7 +46,7 @@ function deleteItem(clicked_id) {
             const nm = '#el' + name
             boolList[k] = false
 
-            $(id).remove()
+            $(liList[delList.indexOf(clicked_id)]).remove()
         }
         k++
     }
@@ -75,6 +77,7 @@ function addDel() {
     deleteButton.setAttribute('onClick', 'deleteItem(this.id)')
     deleteButton.setAttribute('type', 'button')
     deleteButton.innerHTML = '&nbsp Delete &nbsp'
+    delList[count] = deleteButton.getAttribute('id')
     return deleteButton
 }
 
@@ -107,7 +110,8 @@ function renderListData(value) {
     li.innerHTML = `${value}`
     li.setAttribute('id', 'el' + count)
     li.appendChild(addPrm())
-    //li.appendChild(addDel())
+    li.appendChild(addDel())
+    liList[count] = li
     return li
 }
 
