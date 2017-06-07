@@ -1,5 +1,6 @@
 let listEmpty = true
 let count = 0
+let countName = 0
 let list = new Array()
 let boolList = new Array()
 let delList = new Array()
@@ -58,7 +59,8 @@ function deleteItem(clicked_id) {
 
 function addToList(name) {
     count++
-    list[count] = new Array(count + ' : ' + name)
+    countName++
+    list[count] = new Array(countName + ' : ' + name)
     boolList[count] = new Array(true)
     console.log('Added ' + list[count])
 }
