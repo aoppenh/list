@@ -44,7 +44,8 @@ function deleteItem(clicked_id) {
             split = name.split('')
             const id = '#el' + split[0]
             const nm = '#el' + name
-            boolList.splice(delList.indexOf(clicked_id), 1)
+            //boolList.splice(delList.indexOf(clicked_id), 1)
+            boolList[k] = false
 
             $(liList[delList.indexOf(clicked_id)]).remove()
         }
