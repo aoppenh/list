@@ -28,3 +28,11 @@ button {
 #title {
     font-size: 2.2rem;
 }
+
+#stuff {
+    text-align: center;
+}
+
+.buttonHolder {
+    text-align: center;
+}
