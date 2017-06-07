@@ -131,6 +131,7 @@ function handleSubmit(ev) {
 
 function handleReset() {
     count = 0
+    countName = 0
     listEmpty = true
 
     console.log('clearing list')
